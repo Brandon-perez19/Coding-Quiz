@@ -55,6 +55,9 @@ function countdown() {
             clearInterval(timeInterval);
             endGame()
         }
+        else if (startingIndex === questions.length){
+            clearInterval(timeInterval);
+        }
     }, 1000);
 }
 
