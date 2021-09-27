@@ -13,6 +13,7 @@ https://brandon-perez19.github.io/Coding-Quiz
   
 ## ScreenShot of Application
 
+![](assets/images/Screen-Shot-1.png)
 
 ## Contribution
 
