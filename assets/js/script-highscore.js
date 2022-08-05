@@ -1,16 +1,27 @@
-function retrieveScores () {
-    var highscoresArr =[]
+function retrieveScores() {
     var highscores = JSON.parse(localStorage.getItem("scores"));
-    highscoresArr.push(highscores)
-
-    for (let i = 0; i < highscoresArr.length; i++) {
-        var display = document.querySelector("#placement");
+    var display = document.querySelector("#placement");
+    if (!highscores) {
         var list = document.createElement("li");
-        var finalScore = highscoresArr[i].finalScore
-        var initials = highscoresArr[i].initials
+        list.textContent= "No Scores Saved!"
+        display.appendChild(list);
+    }
+    else if (highscores.length >= 2) {
+        for (let i = 0; i < highscores.length; i++) {
+            var list = document.createElement("li");
+            var finalScore = highscores[i].finalScore
+            var initials = highscores[i].initials
+            list.textContent = initials + " : " + finalScore
+            display.appendChild(list);
+        };
+    }
+    else {
+        var list = document.createElement("li");
+        var finalScore = highscores.finalScore
+        var initials = highscores.initials
         list.textContent = initials + " : " + finalScore
         display.appendChild(list);
-    };
+    }
 };
 
 retrieveScores();
