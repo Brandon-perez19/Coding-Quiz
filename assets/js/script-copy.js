@@ -46,6 +46,7 @@ var questions = [
                         answer: "Hypertext Markup Language"
                     }
                 ]
+
 //function to have countdown clock
 function countdown() {
     var timeInterval = setInterval(function() {
@@ -61,28 +62,32 @@ function countdown() {
     }, 1000);
 }
 
-startButton.addEventListener("click", startGame)
+
 //start quiz function, displays each time you load the page
 function startGame () {
     startSection.classList.add("hide");
     quiz.classList.remove("hide");
-    countdown();
+    // countdown();
     loadQuestions();
 }
+
 //function to load in new questions
 var loadQuestions = function () {
     if (startingIndex === questions.length){
         endGame();
     }
     else {
-        //adds question to question section on html
+        //sets variable to question property in questions array 
         var quizQuestion = questions[startingIndex].question
+        //sets the inner html of the section to whatever question is next
         title.innerHTML = quizQuestion
             //creates a button for each answer option and assigns it a unique id
             for (var i = 0; i < questions[startingIndex].choices.length; i++) {
                 var questionButtons = document.createElement("button");
-                questionButtons.innerHTML = questions[startingIndex].choices[i];
+                questionButtons.innerHTML = questions[startingIndex].choices[i]; 
+
                 const element = questions[startingIndex].choices[i];
+                questionButtons.setAttribute("class", "btn btn-primary col-3")
                 questionButtons.setAttribute("questionId", element)
                 choices.appendChild(questionButtons);
                     questionButtons.addEventListener("click", function (event){
@@ -93,6 +98,7 @@ var loadQuestions = function () {
                         
                         if (currentAnswer === correctAnswer) {
                             solution.innerHTML = "Correct!";
+                            solution.setAttribute("class", "text-success h1 text-center fw-bolder")
                             highscore ++;
                             startingIndex++;
                             choices.innerHTML=""
@@ -101,6 +107,7 @@ var loadQuestions = function () {
                         }
                         else {
                             solution.innerHTML = "Wrong!";
+                            solution.setAttribute("class", "text-danger h1 text-center fw-bolder")
                             time = time - 10;
                             console.log(time);
                             startingIndex++;
@@ -122,13 +129,15 @@ function endGame () {
     // to display end title
     var endTitle = document.createElement("h1");
     endTitle.textContent = "All done!";
-    endTitle.className = "end-title"
+
+    //add the attribute class and then its associated values
+    endTitle.className = "end-title text-primary"
     endScreenEl.appendChild(endTitle);
 
     // to display final score
     var finalScore = document.createElement("p");
     finalScore.textContent = "Your final score is " + finalScoreEl + " .";
-    finalScore.className = "final-score-description";
+    finalScore.className = "final-score-description text-primary";
     endScreenEl.appendChild(finalScore);
 
     var initialLabel = document.createElement("label");
@@ -138,15 +147,18 @@ function endGame () {
 
     var initialEntry = document.createElement("input");
     initialEntry.setAttribute("type", "text");
-    initialEntry.classList.add("input");
+    initialEntry.setAttribute("class","form-control input my-2")
     initialEntry.setAttribute("name","initials");
+    initialEntry.setAttribute("placeholder", "Ex: BP")
     endScreenEl.appendChild(initialEntry);
 
     // button to submit
     var submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
     submitButton.setAttribute("type","submit");
+    submitButton.setAttribute("class","btn btn-success")
     endScreenEl.appendChild(submitButton);
+
     // appends main div to body element
     title.appendChild(endScreenEl) 
     submitButton.addEventListener("click", function capture (event){
@@ -156,11 +168,6 @@ function endGame () {
         input.value = "";
         
     })
-
-    
-    
-
-    
-
-
 }
+
+startButton.addEventListener("click", startGame)
