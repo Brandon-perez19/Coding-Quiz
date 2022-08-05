@@ -1,13 +1,3 @@
-/*
-PROBLEMS:
-Data tag increases by one, meaning answer values will have to change based on last click. IE:
-If first question's answer is answer choice 1, next questions answers will need to be increased by 1.
-
-Load question only loads one question, can't figure out how to loop it back.
-
-Added endscreen function, but keeps repeating due to setinterval function.
-
-*/
 var startingIndex = 0
 var highscore = 0
 var time = 60
@@ -67,7 +57,7 @@ function countdown() {
 function startGame() {
     startSection.classList.add("hide");
     quiz.classList.remove("hide");
-    // countdown();
+    countdown();
     loadQuestions();
 }
 
@@ -123,6 +113,7 @@ function endGame() {
     var finalScoreEl = highscore * time
     header.classList.add("hide");
     title.innerHTML = "";
+    choices.innerHTML='';
     solution.innerHTML = "";
     var endScreenEl = document.createElement("div");
 
